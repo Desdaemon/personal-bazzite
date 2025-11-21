@@ -11,7 +11,23 @@ set -ouex pipefail
 
 # this installs a package from fedora repos
 # dnf5 install -y tmux 
-dnf5 install -y fuzzel gparted mako swaybg swayidle waybar xwayland-satellite
+dnf5 install -y \
+  fuzzel gparted mako swaybg swayidle waybar xwayland-satellite \
+  sway niri
+
+# prepare gamescope-session and gamescope-session-steam
+
+clone_and_install() {
+  mkdir __tmp__
+  cd __tmp__
+  git clone "$1" pkgdir
+  cp -rv ./pkgdir/usr /
+  cd ..
+  rm -rf __tmp__
+}
+
+clone_and_install https://github.com/ChimeraOS/gamescope-session.git
+clone_and_install https://github.com/ChimeraOS/gamescope-session-steam.git
 
 # Use a COPR Example:
 #
