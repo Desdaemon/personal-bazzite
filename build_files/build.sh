@@ -13,17 +13,14 @@ set -ouex pipefail
 # dnf5 install -y tmux 
 dnf5 install -y \
   fuzzel gparted mako swaybg swayidle waybar xwayland-satellite \
-  sway niri
+  sway niri swaylock
 
 # prepare gamescope-session and gamescope-session-steam
 
 clone_and_install() {
-  mkdir __tmp__
-  cd __tmp__
   git clone "$1" pkgdir
   cp -rv ./pkgdir/usr /
-  cd ..
-  rm -rf __tmp__
+  rm -rf pkgdir
 }
 
 clone_and_install https://github.com/ChimeraOS/gamescope-session.git
